@@ -6,7 +6,7 @@ import { flatMenu as Menu } from '../config/menu'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: Menu.map(item => {
     return {
       path: item.path,
@@ -15,3 +15,10 @@ export default new Router({
     }
   })
 })
+
+//鉴权
+// router.beforeEach((to, from, next) => {
+  
+// })
+
+export default router

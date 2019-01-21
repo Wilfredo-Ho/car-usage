@@ -28,11 +28,19 @@
 import { $post } from '../util'
 
 export default {
+    props: {
+        url: {
+            required: true,
+            type: String
+        },
+        columns: {
+            required: true,
+            type: Array
+        }
+    },
     data () {
         return {
-            url: '',
             tableData: [],
-            columns: [],
             loading: false,
             total: 100,
             selectedRow: null,

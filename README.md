@@ -62,6 +62,25 @@
 3. 移除.gitignore中关于dist的限制
 
 
+##### Day3:
+1. 从vue-cli 2.x 移植到 vue-cli 3.x: 更加简洁/干净
+    > 对于webpack配置的修改放在了 *vue.config.js* 中
+    > 指令的变化
+    > vue ui的可简化配置
+
+2. 一般化方法的封装：
+    > extNumber: 字符中数字提取（去掉单位）
+    > thousandBitSeparator: thousandBitSeparator
+    > $post: 基于axios的post请求封装
+
+3. 首页的制作
+    Row, Col, Charts
+
+4. table-pagination的封装
+    Table, Page
+
+
+
 
 ## Project setup
 ```
