@@ -28,7 +28,7 @@ export const thousandBitSeparator = (num) => {
 * @params String (url), Object (params), Function (cb)
 * @return Function
 * */
-const SERVER_URL = 'http://60.30.94.170:9728'
+const SERVER_URL = 'http://60.30.94.170:9728/api/Values'
 export const $post = (url, params, cb) => {
   axios.post(SERVER_URL + url, qs.stringify(params))
     .then(response => response.data)

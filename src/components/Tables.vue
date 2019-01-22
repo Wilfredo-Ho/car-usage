@@ -8,15 +8,18 @@
                 :stripe='true'
                 :border='true'
                 :highlight-row='true'
-                @on-row-click='handleRowClick'
+                @on-current-change='handleSelectedRowChange'
             />
         </div>
         <div class="page-wpt">
             <Page 
                 show-elevator
                 show-sizer
+                show-total
                 :total='total'
                 :current='pagination.number'
+                :page-size='pagination.size'
+                :page-size-opts='[15, 30, 50, 100]'
                 @on-change='handlePageNumberChange'
                 @on-page-size-change='handlePageSizeChange'
             />
@@ -40,41 +43,72 @@ export default {
     },
     data () {
         return {
+            loading: true,
             tableData: [],
-            loading: false,
             total: 100,
-            selectedRow: null,
+            // selectedRow: null,
             pagination: {
                 number: 1,
-                size: 10,
+                size: 15,
             }
         }   
     },
     methods: {
-        handleRowClick (row, index) {
-            this.selectedRow = row
+        handleSelectedRowChange (currentRow) {
+            this.$emit('rowChecked', currentRow)
         },
         handlePageNumberChange (number) {
-            let pagination = {
+            this.pagination = {
                 ...this.pagination,
                 number
             }
             this.handlePageChange();
         },
         handlePageSizeChange (size) {
-            let pagination = {
+            this.pagination = {
                 ...this.pagination,
                 size
             }
             this.handlePageChange();
         },
         handlePageChange () {
-            $post(this.url, {...this.pagination}, (res) => {
+            this.loading = true
+            let user = {
+                UserID: 1,
+                RoleID: 1,
+                page: this.pagination.number,
+                row: this.pagination.size
+            }
+            console.log(this.pagination.number)
+            $post(this.url, user, (res) => {
+                console.log(res)
                 this.total = res.total;
-                this.data = res.rows;
+                this.tableData = res.rows;
+                this.loading = false;
             })
         }
+    },
+    mounted () {
+        this.handlePageChange();
     }
 }
 </script>
+
+<style scoped>
+.table-wpt >>> .ivu-table-cell {
+    white-space: nowrap;
+    word-break: normal;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.table-wpt >>> .ivu-table td, .table-wpt >>> .ivu-table th {
+    height: 40px;
+}
+
+.page-wpt {
+    margin-top: .5rem;
+}
+</style>
+
 

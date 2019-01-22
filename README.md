@@ -79,6 +79,10 @@
 4. table-pagination的封装
     Table, Page
 
+##### Day4:
+1. 继续封装table-pagination组件：
+> 组件无法自适应宽度，需要每一列去规定最小长度，很不方便 :angry:
+
 
 
 
